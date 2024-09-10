@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://y0ojsfbbo5ss"]
+
+[ext_resource type="Texture2D" uid="uid://b8fx5kwwnr0wd" path="res://art/dark-nut.png" id="1_ov5k8"]
+[ext_resource type="Texture2D" uid="uid://c0gmvorb5mvhk" path="res://art/light-nut.png" id="2_wfni4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bvo4o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ov5k8")
+}],
+"loop": true,
+"name": &"dark",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wfni4")
+}],
+"loop": true,
+"name": &"light",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k8xbc"]
+radius = 21.0
+height = 46.0
+
+[node name="nut" type="Area2D"]
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.04, 0.04)
+sprite_frames = SubResource("SpriteFrames_bvo4o")
+animation = &"light"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_k8xbc")

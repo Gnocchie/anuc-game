@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://bid1woepyfgyv"]
+
+[ext_resource type="Script" path="res://mob.gd" id="1_h3t21"]
+[ext_resource type="Texture2D" uid="uid://ctfhkc30pt330" path="res://art/fireball.png" id="2_1lsxa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea8b5"]
+atlas = ExtResource("2_1lsxa")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agg0p"]
+atlas = ExtResource("2_1lsxa")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wcso"]
+atlas = ExtResource("2_1lsxa")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfray"]
+atlas = ExtResource("2_1lsxa")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5aouh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ea8b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agg0p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wcso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfray")
+}],
+"loop": true,
+"name": &"fireball",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_buk3o"]
+radius = 13.0
+height = 56.6667
+
+[node name="mob" type="RigidBody2D" groups=["mobs"]]
+scale = Vector2(1.2, 1.2)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_h3t21")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-10, 0)
+scale = Vector2(1.25, 1.25)
+sprite_frames = SubResource("SpriteFrames_5aouh")
+animation = &"fireball"
+frame_progress = 0.602383
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, -2)
+rotation = 1.5708
+scale = Vector2(1.25, 1.25)
+shape = SubResource("CapsuleShape2D_buk3o")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_screen_exited"]
